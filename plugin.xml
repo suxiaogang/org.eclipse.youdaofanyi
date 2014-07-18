@@ -10,7 +10,7 @@
                id="org.samsu.wordstranslation.toolbar">
             <command
                   commandId="org.samsu.wordstranslation.popupActionCommand"
-                  icon="icon/menu.png"
+                  icon="icon/icon_16x16.png"
                   style="push"
                   tooltip="有道翻译">
             </command>
@@ -23,13 +23,29 @@
             id="org.samsu.wordstranslation.popupActionCommand"
             name="name">
          <defaultHandler
-               class="org.samsu.youdaofanyi.ui.OpenDialogHandler">
-            <parameter
-                  name="WordsTranslation.parameter1"
-                  value="WordsTranslation.parameter1">
-            </parameter>
+               class="org.eclipse.youdaofanyi.ui.OpenDialogHandler">
          </defaultHandler>
       </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="org.eclipse.youdaofanyi.preference.PreferencePageMain"
+            id="org.eclipse.youdaofanyi.preferencePageID"
+            name="有道翻译">
+      </page>
+      <page
+            category="org.eclipse.youdaofanyi.preferencePageID"
+            class="org.eclipse.youdaofanyi.preference.PreferencePageConfig"
+            id="org.eclipse.youdaofanyi.preferencePageOfConfig"
+            name="API key配置">
+      </page>
+      <page
+            category="org.eclipse.youdaofanyi.preferencePageID"
+            class="org.eclipse.youdaofanyi.preference.PreferencePageDict"
+            id="org.eclipse.youdaofanyi.preferencePageOfDict"
+            name="单词本">
+      </page>
    </extension>
 
 </plugin>

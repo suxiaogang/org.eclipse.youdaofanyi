@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wordbook>
+    <item>
+        <word>hello</word>
+        <trans>n. 表示问候， 惊奇或唤起注意时的用语, n. (Hello)人名；(法)埃洛, int. 喂；哈罗</trans>
+        <phonetic>[hə'ləʊ; he-]</phonetic>
+    </item>
+    <item>
+        <word>world</word>
+        <trans>n. 世界；领域；宇宙；世俗；全人类；物质生活</trans>
+        <phonetic>[wɜːld]</phonetic>
+    </item>
+</wordbook>

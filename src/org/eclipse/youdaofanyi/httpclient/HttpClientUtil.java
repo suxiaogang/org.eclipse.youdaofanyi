@@ -1,7 +1,6 @@
-package org.samsu.youdaofanyi.httpclient;
+package org.eclipse.youdaofanyi.httpclient;
 
 import java.io.InputStream;
-import java.util.Date;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
@@ -10,9 +9,11 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.params.ClientPNames;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.eclipse.youdaofanyi.document.DocumentHelper;
+import org.eclipse.youdaofanyi.model.ResultModel;
+import org.eclipse.youdaofanyi.preference.PreferenceUtil;
+import org.eclipse.youdaofanyi.ui.DialogUtil;
 import org.jdom.Document;
-import org.samsu.youdaofanyi.document.DocumentHelper;
-import org.samsu.youdaofanyi.model.ResultModel;
 
 public class HttpClientUtil {
 	
@@ -22,7 +23,9 @@ public class HttpClientUtil {
 		httpclient.getParams().setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, false);
 		HttpHost targetHost = new HttpHost(youdao);
 		query = query.replace(" ", "%20");
-		HttpGet httpget = new HttpGet("/openapi.do?keyfrom=Sam-Su&key=1825873072&type=data&doctype=xml&version=1.1&q=" + query);
+		String apiKeyString = PreferenceUtil.getAPIkey();
+		//fanyi.youdao.com/openapi.do?keyfrom=Sam-Su&key=1825873072&type=data&doctype=xml&version=1.1&q=Dictionary
+		HttpGet httpget = new HttpGet("/openapi.do?keyfrom="+ apiKeyString +"&type=data&doctype=xml&version=1.1&q=" + query);
 		httpget.setHeader("User-Agent", "Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.1.2)");
         httpget.setHeader("Accept-Language", "zh-cn,zh;q=0.5");
         httpget.setHeader("Accept-Charset", "GB2312,utf-8;q=0.7,*;q=0.7");
@@ -42,7 +45,7 @@ public class HttpClientUtil {
 				doc = DocumentHelper.getDocument(content);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			DialogUtil.showTipMessageDialog(e.getClass().toString().replace("class ", ""));
 		} 
         httpclient.getConnectionManager().shutdown(); 
         return doc;

@@ -1,4 +1,4 @@
-package org.samsu.youdaofanyi.document;
+package org.eclipse.youdaofanyi.document;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -9,7 +9,7 @@ import java.io.OutputStream;
 import java.io.Reader;
 import java.io.Writer;
 
-import org.eclipse.core.resources.IFile;
+import org.eclipse.youdaofanyi.dict.DictionaryUtil;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -74,17 +74,16 @@ public class DocumentHelper {
 		outputter.output(document, writer);
 	}
 
-	public static void saveDocToFile(Document doc, IFile file) {
+	public static void saveDocToFile(Document doc, File file) {
 		OutputStream os = null;
 		try {
-			File renewFile = file.getLocation().toFile();
-			if (!renewFile.exists()) {
-				renewFile.createNewFile();
+			if (!file.exists()) {
+				DictionaryUtil.initDefaultFromTemplate();
 			}
-			if (!renewFile.canWrite()) {
-				renewFile.setWritable(true);
+			if (!file.canWrite()) {
+				file.setWritable(true);
 			}
-			os = new BufferedOutputStream(new FileOutputStream(renewFile));
+			os = new BufferedOutputStream(new FileOutputStream(file));
 			DocumentHelper.write(doc, os);
 		} catch (Throwable e) {
 			e.printStackTrace();
